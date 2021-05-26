@@ -1,13 +1,14 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Trivia from "./components/Trivia/Trivia";
 import Timer from "./components/Timer/Timer";
+import Start from "./components/Start/Start";
 
 function App() {
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [userName, setUserNmae] = useState(null);
+  const [userName, setUserName] = useState(null);
   const [timer, setTimer] = useState(false);
-  const [earned,setEarned] =useState(0)
+  const [earned, setEarned] = useState(0);
   const data = [
     {
       id: 1,
@@ -95,44 +96,59 @@ function App() {
   ].reverse();
 
   useEffect(() => {
-    questionNumber >1 && setEarned(Level.find(m=> m.id === questionNumber-1).amount)
-  }, [Level,questionNumber])
+    questionNumber > 1 &&
+      setEarned(Level.find((m) => m.id === questionNumber - 1).amount);
+  }, [Level, questionNumber]);
   return (
     <div className="app">
-      <div className="main">
-        {timer ? (<h1 className="endText">You earned:{earned}</h1>) : (
-          <>
-        <div className="top">
-          <div className="timer"><Timer setTimer={setTimer} questionNumber={questionNumber}/></div>
-        </div>
-        <div className="bottom">
-          <Trivia
-            data={data}
-            setQuestionNumber={setQuestionNumber}
-            questionNumber={questionNumber}
-            setTimer={setTimer}
-          />
-        </div>
-        </>)}
-      </div>
-      <div className="money">
-        <ul className="moneyList">
-          {Level.map((m) => (
-            <li
-              key={m.id}
-              className={
-                questionNumber === m.id
-                  ? "moneyListItem active"
-                  : "moneyListItem"
-              }
-            >
-              <span className="moneyLIstItemNumber">{m.id}</span>
-              <span className="moneyLIstItemNumberAmount">{m.amount}</span>
-              {timer}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {userName ? (
+        <>
+          <div className="main">
+            {timer ? (
+              <h1 className="endText">You earned:{earned}</h1>
+            ) : (
+              <>
+                <div className="top">
+                  <div className="timer">
+                    <Timer
+                      setTimer={setTimer}
+                      questionNumber={questionNumber}
+                    />
+                  </div>
+                </div>
+                <div className="bottom">
+                  <Trivia
+                    data={data}
+                    setQuestionNumber={setQuestionNumber}
+                    questionNumber={questionNumber}
+                    setTimer={setTimer}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+          <div className="money">
+            <ul className="moneyList">
+              {Level.map((m) => (
+                <li
+                  key={m.id}
+                  className={
+                    questionNumber === m.id
+                      ? "moneyListItem active"
+                      : "moneyListItem"
+                  }
+                >
+                  <span className="moneyLIstItemNumber">{m.id}</span>
+                  <span className="moneyLIstItemNumberAmount">{m.amount}</span>
+                  {timer}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      ) : (
+        <Start setUserName={setUserName} />
+      )}
     </div>
   );
 }
