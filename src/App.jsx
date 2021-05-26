@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from "react";
 import "./App.css";
 import Trivia from "./components/Trivia/Trivia";
+import Timer from "./components/Timer/Timer";
 
 function App() {
   const [questionNumber, setQuestionNumber] = useState(1);
+  const [userName, setUserNmae] = useState(null);
   const [timer, setTimer] = useState(false);
   const [earned,setEarned] =useState(0)
   const data = [
@@ -101,7 +103,7 @@ function App() {
         {timer ? (<h1 className="endText">You earned:{earned}</h1>) : (
           <>
         <div className="top">
-          <div className="timer">30</div>
+          <div className="timer"><Timer setTimer={setTimer} questionNumber={questionNumber}/></div>
         </div>
         <div className="bottom">
           <Trivia
