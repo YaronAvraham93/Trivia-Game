@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./App.css";
 import Trivia from "./components/Trivia/Trivia";
 
 function App() {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [timer, setTimer] = useState(false);
+  const [earned,setEarned] =useState(0)
   const data = [
     {
       id: 1,
@@ -90,9 +91,15 @@ function App() {
     { id: 14, amount: "$1600" },
     { id: 15, amount: "$1700" },
   ].reverse();
+
+  useEffect(() => {
+    questionNumber >1 && setEarned(Level.find(m=> m.id === questionNumber-1).amount)
+  }, [Level,questionNumber])
   return (
     <div className="app">
       <div className="main">
+        {timer ? (<h1 className="endText">You earned:{earned}</h1>) : (
+          <>
         <div className="top">
           <div className="timer">30</div>
         </div>
@@ -104,6 +111,7 @@ function App() {
             setTimer={setTimer}
           />
         </div>
+        </>)}
       </div>
       <div className="money">
         <ul className="moneyList">

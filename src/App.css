@@ -142,3 +142,10 @@
   border-radius: 10px;
   font-size: 20px;
 }
+.endText{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    font-size: 80px;
+}
