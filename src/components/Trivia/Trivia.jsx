@@ -3,8 +3,9 @@ import useSound from "use-sound";
 import play from "../../Sounds/play.mp3";
 import wrong from "../../Sounds/wrong.mp3";
 import correct from "../../Sounds/correct.mp3";
+import questionData from "../../constants/questionData";
 
-function Trivia({ data, setTimer, questionNumber, setQuestionNumber }) {
+function Trivia({ setTimer, questionNumber, setQuestionNumber }) {
   const [question, setQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [className, setClassName] = useState("answer");
@@ -44,8 +45,8 @@ function Trivia({ data, setTimer, questionNumber, setQuestionNumber }) {
     });
   };
   useEffect(() => {
-    setQuestion(data[questionNumber - 1]);
-  }, [data, questionNumber]);
+    setQuestion(questionData[questionNumber - 1]);
+  }, [questionData, questionNumber]);
 
   return (
     <div className="trivia">
