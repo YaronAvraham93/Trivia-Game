@@ -54,9 +54,9 @@ function Trivia({ setTimer, questionNumber, setQuestionNumber }) {
       <div className="answers">
         {question?.answers.map((a) => (
           <div
-            key={a.id}
-            className={selectedAnswer === a ? className : "answer"}
-            onClick={() => handleClick(a)}
+          key={a.id}
+          className={selectedAnswer === a ? className : "answer"}
+          onClick={() => handleClick(a)}
           >
             {a.text}
           </div>

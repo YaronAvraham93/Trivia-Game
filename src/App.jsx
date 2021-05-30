@@ -17,14 +17,19 @@ function App() {
     questionNumber > 1 &&
       setEarned(level.find((m) => m.id === questionNumber - 1).amount); 
   }, [level, questionNumber]);
- 
+  const handleClick = () => {
+    window.location.reload()
+  }
   return (
     <div className="app">
       {userName ? (
         <>
           <div className="main">
             {timer ? (
-              <h1 className="endText">{userName} You earned:{earned}</h1>
+             
+              <h1 className="endText">{userName} You earned:{earned}
+               <button className="reload" onClick={handleClick}>Try agian</button>
+              </h1>
             ) : (
               <>
                 <div className="top">
